@@ -28,7 +28,7 @@ public class test {
 		}
 			while(true) {
 				for(int x=14;x>=0;x--){
-					for(int y=10;y>=0;y--)
+					for(int y=0;y<10;y++)
 						if(map[x][y].water==0)
 							if(map[x][y].status==3)
 								System.out.print(ConsoleColor.BLACK + "■ " + ConsoleColor.RESET);
@@ -47,9 +47,7 @@ public class test {
 					if(map[k][i].water==2) j=k;
 					k++;
 				}
-				if(map[j][i].E==map[j][i].E1)
-					map[j][i].E1=0;
-				else {	
+				if(map[j][i].E!=map[j][i].E1) {	
 				if(isWall(j+1,i,map)){
 					if(i!=0) {
 					// 벽 찾아서
@@ -62,6 +60,7 @@ public class test {
 				}
 				if(i!=0&&map[j][i-1].status==2&&map[j][i-1].water==0) {
 					map[j][i-1].E=map[j][i].E*0.3;
+					map[j][i-1].E1=map[j][i].E*0.3;
 					map[j][i-1].water=2;
 				}}
 			}
@@ -70,11 +69,12 @@ public class test {
 				while(k<15) {
 					if(map[k][i].water==2) j=k;
 					k++;
-				}
+				}if(map[j][i].E!=map[j][i].E1) {
 				if(!isWall(j+1,i,map)) {
 				map[j+1][i].E=map[j][i].E*map[j+1][i].Friction;
-				//map[j][i].E=0;
-				map[j+1][i].water=2;}
+				//map[j+1][i].E1=map[j][i].E*map[j+1][i].Friction;
+				map[j+1][i].water=2;}}
+				map[j][i].E1=0;
 			}
 	}
 	}

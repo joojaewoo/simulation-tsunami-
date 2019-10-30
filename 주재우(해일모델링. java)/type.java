@@ -1,13 +1,31 @@
 package simple;
 
+import java.util.Random;
+
 public class type {
-int status; //1 ¹Ù´Ù//2 ¶¥
+int status; //1 ¹Ù´Ù//2 ¶¥ // 3 °Ç¹°
 int water=0; //Ä§¼ö¿©ºÎ 1Ä§¼ö 0¾Æ´Ô
 double E; // E
+double E1;
 double Friction; // ¸¶Âû·Â ¹°¿¡¼­ 0 ¶¥¿¡¼­ 0.2
 public type(int status,double E,double Friction) {
 	this.status=status; 
 	this.E=E;
 	this.Friction=Friction;
 }
+}
+
+class water {
+	int stauts =1;
+	int water = 0;
+	double E =0;
+	double Friction =0;
+}
+
+class ground{
+	Random ran= new Random();
+	int stauts =2;
+	int water =0;
+	double E=0;
+	double Friction =0.85-ran.nextDouble()*0.1;
 }

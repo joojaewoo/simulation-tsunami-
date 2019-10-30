@@ -5,7 +5,7 @@ import java.util.Random;
 public class test {
 
 	public static void main(String[] args) {
-		type [][] map=new type[15][11];
+		type [][] map=new type[20][11];
 		Random ran=new Random();
 		for(int j=1;j<9;j++){
 			if(j%3==0) {
@@ -22,11 +22,12 @@ public class test {
 		for(int i=0;i<11;i++) {
 			map[0][i]=new type(1,70+ran.nextDouble()*50,0);
 			map[0][i].water=2;}
-		for(int i=9;i<15;i++ ) {
+		for(int i=9;i<20;i++ ) {
 			for(int j=0;j<11;j++)
 				map[i][j]=new type(2,0,0.85-ran.nextDouble()*0.1);
 		}
-			while(true) {
+		int z=0;
+			while(z<30) {
 				for(int x=14;x>=0;x--){
 					for(int y=0;y<10;y++)
 						if(map[x][y].water==0)
@@ -46,8 +47,7 @@ public class test {
 				while(k<15) {
 					if(map[k][i].water==2) j=k;
 					k++;
-				}
-				if(map[j][i].E!=map[j][i].E1) {	
+				}	
 				if(isWall(j+1,i,map)){
 					if(i!=0) {
 					// 벽 찾아서
@@ -56,26 +56,24 @@ public class test {
 				if(i!=10&&map[j][i+1].status==2&&map[j][i+1].water==0) {
 					map[j][i+1].E=map[j][i].E*0.3;
 					map[j][i+1].E1=map[j][i].E*0.3;
-					map[j][i+1].water=2;
 				}
 				if(i!=0&&map[j][i-1].status==2&&map[j][i-1].water==0) {
 					map[j][i-1].E=map[j][i].E*0.3;
-					map[j][i-1].E1=map[j][i].E*0.3;
-					map[j][i-1].water=2;
-				}}
+				}
 			}
 			for(int i=0;i<11;i++) {
 				int j=0,k=0;
 				while(k<15) {
 					if(map[k][i].water==2) j=k;
 					k++;
-				}if(map[j][i].E!=map[j][i].E1) {
+				}
 				if(!isWall(j+1,i,map)) {
 				map[j+1][i].E=map[j][i].E*map[j+1][i].Friction;
-				//map[j+1][i].E1=map[j][i].E*map[j+1][i].Friction;
 				map[j+1][i].water=2;}}
-				map[j][i].E1=0;
-			}
+			for(int a=0;a<20;a++)
+				for(int b=0;b<11;b++)
+					if(map[a][b].E>=0.4&&map[a][b].water!=2)
+						map[a][b].water=2;
 	}
 	}
 	static boolean isWall(int i,int j,type map[][]) {
